@@ -164,12 +164,8 @@ const setupProxy = async (
 
   const httpsAgent = new ProxyAgent({
     ...agentOptions,
-    protocol: 'https:',
-    ...(app.commandLine.hasSwitch('ignore-certificate-errors')
-      ? {
-          rejectUnauthorized: false // XXX: Danger! For debugging purposes only
-        }
-      : {}) // XXX: we need the key not to be present for our unit tests to pass
+    protocol: 'https:'
+    // Removed the insecure rejectUnauthorized setting
   })
   // $FlowFixMe
   https.globalAgent = httpsAgent
